@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchContacts } from "../../redux/contacts/operations";
 import { selectError, selectIsLoading } from "../../redux/contacts/selectors";
 import css from "./ContactsPage.module.css";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import Loader from "../../components/Loader/Loader";
 import DocumentTitle from "../../components/DocumentTitle";
@@ -18,11 +18,7 @@ export default function ContactPage() {
 
   useEffect(() => {
     dispatch(fetchContacts());
-
-    if (error) {
-      toast.error(error);
-    }
-  }, [dispatch, error]);
+  }, [dispatch]);
 
   return (
     <>
