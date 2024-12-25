@@ -8,11 +8,10 @@ import {
 import { logout } from "../auth/operations";
 
 const initialState = {
-  items: {},
+  items: [],
   currentContact: null,
   isLoading: false,
   isError: null,
-  sortBy: "name",
 };
 
 const contactsSlice = createSlice({
@@ -36,7 +35,7 @@ const contactsSlice = createSlice({
         state.items = action.payload.date.date;
       })
       .addCase(addContact.fulfilled, (state, action) => {
-        state.items.push(action.payload);
+        state.items.push(action.payload.date);
       })
       .addCase(deleteContact.fulfilled, (state, action) => {
         const index = state.items.findIndex(
