@@ -19,7 +19,7 @@ export const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await goItApi.post("/auth/register", credentials);
-      setAuthHeader(res.data.token);
+      setAuthHeader(res.data.accessToken);
       return res.data;
     } catch (error) {
       if (error.response && error.response.status === 409) {
@@ -37,7 +37,7 @@ export const logIn = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await goItApi.post("/auth/login", credentials);
-      setAuthHeader(res.data.token);
+      setAuthHeader(res.data.accessToken);
       return res.data;
     } catch (error) {
       if (error.response && error.response.status === 400) {
