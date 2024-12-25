@@ -6,20 +6,20 @@ export const goItApi = axios.create({
   withCredentials: true,
 });
 
-// const setAuthHeader = (token) => {
-//   goItApi.defaults.headers.common.Authorization = `Bearer ${token}`;
-// };
+const setAuthHeader = (token) => {
+  goItApi.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
 
-// const clearAuthHeader = () => {
-//   goItApi.defaults.headers.common.Authorization = "";
-// };
+const clearAuthHeader = () => {
+  goItApi.defaults.headers.common.Authorization = "";
+};
 
 export const register = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
     try {
       const res = await goItApi.post("/auth/register", credentials);
-      // setAuthHeader(res.data.token);
+      setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
       if (error.response && error.response.status === 409) {
@@ -37,7 +37,7 @@ export const logIn = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await goItApi.post("/auth/login", credentials);
-      // setAuthHeader(res.data.token);
+      setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -51,7 +51,7 @@ export const logIn = createAsyncThunk(
 export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
     await goItApi.post("/auth/logout");
-    // clearAuthHeader();
+    clearAuthHeader();
   } catch {
     return thunkAPI.rejectWithValue("Logout failed. Please try again.");
   }
@@ -60,14 +60,14 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 export const refreshUser = createAsyncThunk(
   "auth/refresh",
   async (_, thunkAPI) => {
-    // const state = thunkAPI.getState();
-    // const persistedToken = state.auth.data.accessToken;
-    // if (persistedToken === null) {
-    //   return thunkAPI.rejectWithValue("No valid token found. Please log in.");
-    // }
+    const state = thunkAPI.getState();
+    const persistedToken = state.auth.data.accessToken;
+    if (persistedToken === null) {
+      return thunkAPI.rejectWithValue("No valid token found. Please log in.");
+    }
 
     try {
-      // setAuthHeader(persistedToken);
+      setAuthHeader(persistedToken);
       const res = await goItApi.post("/auth/refresh");
       return res.data;
     } catch {

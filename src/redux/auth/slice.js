@@ -8,7 +8,7 @@ const authSlice = createSlice({
       name: null,
       email: null,
     },
-    // token: null,
+    token: null,
     isLoggedIn: false,
     isRefreshing: false,
     isLoadingAuth: false,
@@ -18,17 +18,17 @@ const authSlice = createSlice({
     builder
       .addCase(register.fulfilled, (state, action) => {
         state.user = action.payload.data.user;
-        // state.token = action.payload.data.accessToken;
+        state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
       })
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.data.user;
-        // state.token = action.payload.data.accessToken;
+        state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = { name: null, email: null };
-        // state.token = null;
+        state.token = null;
         state.isLoggedIn = false;
       })
       .addCase(refreshUser.pending, (state) => {
@@ -37,7 +37,7 @@ const authSlice = createSlice({
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
         state.user = action.payload.data.user;
-        // state.token = action.payload.data.accessToken;
+        state.token = action.payload.data.accessToken;
         state.isLoggedIn = true;
         state.isRefreshing = false;
         state.isError = null;
