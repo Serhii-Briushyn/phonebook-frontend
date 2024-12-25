@@ -8,7 +8,7 @@ import {
 import { logout } from "../auth/operations";
 
 const initialState = {
-  items: [],
+  items: {},
   currentContact: null,
   isLoading: false,
   isError: null,
@@ -33,7 +33,7 @@ const contactsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchContacts.fulfilled, (state, action) => {
-        state.items = action.payload;
+        state.items = action.payload.date.date;
       })
       .addCase(addContact.fulfilled, (state, action) => {
         state.items.push(action.payload);

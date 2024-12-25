@@ -9,7 +9,7 @@ export const UserMenu = () => {
 
   return (
     <div className={css.wrapper}>
-      <p className={css.username}>{user.name.toUpperCase()}</p>
+      <p className={css.username}>{user.name ? user.name : "Guest"}</p>
       <button
         className={css.button}
         type="button"
