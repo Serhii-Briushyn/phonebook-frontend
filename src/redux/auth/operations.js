@@ -2,7 +2,7 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const goItApi = axios.create({
-  baseURL: "https://connections-api.goit.global/",
+  baseURL: "https://phonebook-backend-orpb.onrender.com",
   withCredentials: true,
 });
 
